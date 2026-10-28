@@ -1,1 +1,166 @@
-[]
+- id: diffraction-pattern-simulator
+  title: DiffractionPatternSimulator
+  description: An interactive Fraunhofer diffraction simulator with custom aperture functions, centered image cropping, and exportable visual results.
+  order: 1
+  logo: /assets/projects/diffraction-pattern-simulator.png
+  tone: lavender
+  languages: [ Python ]
+  github:
+    - url: https://github.com/lte-z/FraunhoferDiffraction
+  logoLayout: full
+
+- id: drawing-board
+  title: DrawingBoard
+  description: A drawing board built with EGE, featuring shape tools, undo and redo, visual history, and binary canvas storage.
+  order: 2
+  tone: rose
+  languages: [ C++ ]
+  sourceStatus: private
+  links:
+    - label: Demo video
+      url: https://weixin.qq.com/sph/AYqCdpAF1s
+
+- id: arduino-smart-lock
+  title: ArduinoSmartLock
+  description: An Arduino Uno password lock demonstration with infrared remote input and live status feedback on an I2C LCD.
+  order: 3
+  tone: sage
+  languages: [ C++ ]
+  sourceStatus: private
+
+- id: birthday-paradox-qt
+  title: BirthdayParadoxQt
+  description: A Qt simulator for the birthday paradox, running classroom experiments and presenting shared birthday probabilities visually.
+  order: 4
+  logo: /assets/projects/birthday-paradox-qt.png
+  tone: sand
+  languages: [ C++ ]
+  sourceStatus: private
+
+- id: lantern-reverie
+  title: LanternReverie
+  description: An Axmol puzzle platformer inspired by shadow puppetry, awarded second prize in a university-level student innovation competition.
+  order: 5
+  logo: /assets/projects/lantern-reverie.png
+  tone: lavender
+  languages: [ C++ ]
+  gitee:
+    - url: https://gitee.com/lte_z/lantern-reverie
+
+- id: agent-memory-system
+  title: AgentMemorySystem
+  description: A mem0-inspired memory management demo for storage, retrieval, deduplication, statistics, and batch operations on the web.
+  order: 6
+  tone: rose
+  languages: [ Python, JavaScript ]
+  sourceStatus: private
+
+- id: drone-image-system
+  title: DroneImageSystem
+  description: A desktop toolkit for aerial image processing and residual sparse compression, with comparisons and report export.
+  order: 7
+  logo: /assets/projects/drone-image-system.png
+  tone: sage
+  languages: [ Python ]
+  sourceStatus: private
+
+- id: spirit-ink
+  title: SpiritInk
+  description: A contactless calligraphy system using OpenCV to track gestures and connect computer vision with interactive desktop brushwork.
+  order: 8
+  logo: /assets/projects/spirit-ink.svg
+  tone: sand
+  languages: [ C++, Python, TypeScript ]
+  gitee:
+    - url: https://gitee.com/lte_z/spirit-ink
+
+- id: sector-13
+  title: Sector-13
+  description: A raycasting 3D maze packed into a 512-byte boot sector, using BIOS input and direct VGA graphics.
+  order: 9
+  tone: lavender
+  languages: [ Assembly ]
+  sourceStatus: private
+
+- id: scale-boundary
+  title: ScaleBoundary
+  description: A Unity mobile VR puzzle experience built around switching between miniature, normal, and giant scales to explore its levels.
+  order: 10
+  logo: /assets/projects/scale-boundary.png
+  tone: rose
+  languages: [ C# ]
+  gitee:
+    - url: https://gitee.com/lte_z/scale-boundary
+  links:
+    - label: Demo video
+      url: https://weixin.qq.com/sph/AdqBHEb6Dp
+  logoLayout: full
+
+- id: repo-pilot
+  title: RepoPilot
+  description: A repository exploration agent with read-only defaults, CLI sessions, MCP tools, saved reports, and a web preview interface.
+  order: 11
+  tone: sage
+  languages: [ Python ]
+  github:
+    - url: https://github.com/lte-z/RepoPilot
+
+- id: bupt-gpa-calculator
+  title: BUPT GPA Calculator
+  description: A local-first BUPT GPA calculator with SQLite profiles, academic record imports, and semester statistics in a desktop interface.
+  order: 12
+  logo: /assets/projects/bupt-gpa-calculator.png
+  tone: sand
+  languages: [ C# ]
+  github:
+    - url: https://github.com/lte-z/BUPT-GPA-Calculator
+  links:
+    - label: Launch post
+      url: https://xhslink.cn/o/8w4w5xgCSE1
+
+- id: frame-dock
+  title: FrameDock
+  description: An offline Android photography workflow connecting SD card imports, photo selection, Lightroom exports, and photo archives.
+  order: 13
+  logo: /assets/projects/frame-dock.svg
+  tone: lavender
+  languages: [ Kotlin ]
+  sourceStatus: private
+  logoLayout: full
+
+- id: easy-sva
+  title: easySVA
+  description: A course adaptation of easySVA, combining streaming, video analysis, backend services, and a web frontend.
+  order: 14
+  tone: rose
+  languages: [ C++, Java, JavaScript ]
+  gitee:
+    - url: https://gitee.com/lte_z/SVA-mediaServer
+      label: MediaServer
+    - url: https://gitee.com/lte_z/SVA-server
+      label: Server
+    - url: https://gitee.com/lte_z/SVA-backend
+      label: Backend
+    - url: https://gitee.com/lte_z/SVA-web
+      label: Web
+  github:
+    - url: https://github.com/lte-z/easyGB28181
+      label: easyGB28181
+
+- id: cluster-flow
+  title: ClusterFlow
+  description: A native Linux desktop digital twin for heterogeneous AI clusters, with gang allocation, priority preemption, monitoring, and playback.
+  order: 15
+  logo: /assets/projects/cluster-flow.png
+  tone: sage
+  languages: [ Rust, Python, TypeScript ]
+  gitee:
+    - url: https://gitee.com/lte_z/cluster-flow
+
+- id: regime-shift
+  title: RegimeShift
+  description: "Cross-market volatility risk prediction: shared infrastructure, synthetic integration; business modules in development."
+  order: 16
+  tone: sand
+  languages: [ Python ]
+  sourceStatus: private

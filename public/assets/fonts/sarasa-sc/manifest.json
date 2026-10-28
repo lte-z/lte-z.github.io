@@ -34,8 +34,8 @@
       "file": "regular-kana.woff2",
       "weight": 400,
       "style": "normal",
-      "bytes": 83860,
-      "sha256": "3b1a337abac55fe6be6208f1417b54c3f3aa5a8ed696ed50df8fc4cf75635097"
+      "bytes": 58856,
+      "sha256": "42512392883c363dfa8bf8300590f591f15ee5fafafa2815cce00cc5e3deb43f"
     },
     {
       "file": "regular-u003.woff2",
@@ -286,8 +286,8 @@
       "file": "semibold-kana.woff2",
       "weight": 600,
       "style": "normal",
-      "bytes": 83776,
-      "sha256": "de6c43265e3393f0b346f6de5b1b848f663d81d17e8d977ad60f10e53d42d7f4"
+      "bytes": 58880,
+      "sha256": "5b0260528ffef12b2d00292bc606ba84d0b26ea96f471269288f52dc04ee9026"
     },
     {
       "file": "semibold-u003.woff2",
@@ -538,8 +538,8 @@
       "file": "bold-kana.woff2",
       "weight": 700,
       "style": "normal",
-      "bytes": 82728,
-      "sha256": "a7e357580371f3964857113f5f52d293fc185ace01c460e73be6a209e1de4e05"
+      "bytes": 58960,
+      "sha256": "5b0d1b4461744342e88117123503a42bf141e60b821a63530c70eee7fd141fdb"
     },
     {
       "file": "bold-u003.woff2",
@@ -790,8 +790,8 @@
       "file": "italic-kana.woff2",
       "weight": 400,
       "style": "italic",
-      "bytes": 87296,
-      "sha256": "08c7e537ca353ffbc16ad2c773cc5d7458917e2d9e84bd099f6c727144ccf6e5"
+      "bytes": 62564,
+      "sha256": "4d399fcc84703e29d734dd96402036dcca8c7a9cebcc70c9575083e85f271ec9"
     },
     {
       "file": "italic-u003.woff2",
@@ -1042,8 +1042,8 @@
       "file": "semibolditalic-kana.woff2",
       "weight": 600,
       "style": "italic",
-      "bytes": 87384,
-      "sha256": "9b0dfa6b8016b1ad534ec64f6c77256b33cf389c3edeabcfd85d8b248c5573d0"
+      "bytes": 62632,
+      "sha256": "9a34d3bab2e78f21b551a65813ed977f58b98c97562ef8ff09bb1748f8be34a6"
     },
     {
       "file": "semibolditalic-u003.woff2",
@@ -1294,8 +1294,8 @@
       "file": "bolditalic-kana.woff2",
       "weight": 700,
       "style": "italic",
-      "bytes": 86216,
-      "sha256": "17d937d2b3cb9a7b6d0e13e018d76940e719b0f1f39da51b01f87dbe2640029c"
+      "bytes": 62676,
+      "sha256": "7199918242cd001c0e95581971e33d2b761dd0b9dc01952c33f4c99f813eea14"
     },
     {
       "file": "bolditalic-u003.woff2",

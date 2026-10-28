@@ -8,9 +8,10 @@
 .project-card--sand{--tile:#eee4d2;--logo-ink:#a48a6a}
 
 .project-head{display:grid;grid-template-columns:55px minmax(0,1fr);gap:17px;align-items:start;min-width:0}
-.project-logo{display:grid;place-items:center;width:55px;aspect-ratio:1;border-radius:15px;background:var(--tile);color:var(--logo-ink);transform-origin:center;transition:transform var(--icon-hover-duration) var(--icon-hover-ease)}
+.project-logo{display:grid;place-items:center;width:55px;aspect-ratio:1;border-radius:15px;background:var(--tile);color:var(--logo-ink);overflow:hidden;transform-origin:center;transition:transform var(--icon-hover-duration) var(--icon-hover-ease)}
 .project-card:hover .project-logo{transform:var(--icon-hover-transform)}
 .project-mark{display:block;width:36px;height:36px;overflow:visible;object-fit:contain}
+.project-logo--full .project-mark{width:100%;height:100%}
 .project-writing{min-width:0}
 .project-writing h2{font:600 20px/1.34 var(--display);letter-spacing:-.03em;margin:0 0 8px;overflow-wrap:anywhere;}
 .project-writing p{font:400 13.5px/1.72 var(--body);color:var(--muted-dark);margin:0;max-width:46ch;text-wrap:pretty;overflow-wrap:break-word}
