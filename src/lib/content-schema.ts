@@ -11,16 +11,19 @@ const repo = (hostname: string) => url.refine(value => {
     return false;
   }
 }, `Use a ${hostname} repository URL`);
-const repositories = (hostname: string, label: string) => z.array(z.object({
-  url: repo(hostname),
-  label: z.string().trim().nullish().transform(value => value || label)
-})).default([]);
+const repositoryLabel = (fallback: string) => z.string().trim().nullish().transform(value => value || fallback);
+const repositorySchema = z.union([
+  z.strictObject({ github: repo('github.com'), label: repositoryLabel('GitHub') })
+    .transform(({ github, label }) => ({ platform: 'github' as const, url: github, label })),
+  z.strictObject({ gitee: repo('gitee.com'), label: repositoryLabel('Gitee') })
+    .transform(({ gitee, label }) => ({ platform: 'gitee' as const, url: gitee, label }))
+]);
 const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Use a quoted YYYY-MM-DD date').refine(value => {
   const parsed = new Date(`${value}T00:00:00.000Z`);
   return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
 }, 'Invalid calendar date');
 
-export const projectSchema = z.object({
+export const projectSchema = z.strictObject({
   id: contentId,
   title: text,
   description: text,
@@ -29,11 +32,10 @@ export const projectSchema = z.object({
   logoLayout: z.enum(['inset', 'full']).default('inset'),
   tone: z.enum(['lavender', 'rose', 'sage', 'sand']).default('lavender'),
   languages: z.array(text).default([]).refine(values => new Set(values).size === values.length, 'Duplicate language'),
-  github: repositories('github.com', 'GitHub'),
-  gitee: repositories('gitee.com', 'Gitee'),
+  repositories: z.array(repositorySchema).default([]),
   sourceStatus: z.enum(['private', 'unavailable']).optional(),
   links: z.array(z.object({ label: text, url })).default([])
-}).refine(value => !value.sourceStatus || (!value.github.length && !value.gitee.length), {
+}).refine(value => !value.sourceStatus || !value.repositories.length, {
   message: 'Source status cannot accompany repository links', path: ['sourceStatus']
 }).refine(value => value.logoLayout !== 'full' || Boolean(value.logo), {
   message: 'Full logo layout requires an image', path: ['logoLayout']

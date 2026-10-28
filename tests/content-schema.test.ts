@@ -3,57 +3,68 @@ import assert from 'node:assert/strict';
 import { projectSchema, blogSchema } from '../src/lib/content-schema.ts';
 
 const project = { id: 'example', title: 'Example', description: 'Example project.', order: 1 };
-const github = { url: 'https://github.com/example/project' };
-const gitee = { url: 'https://gitee.com/example/project' };
+const github = { github: 'https://github.com/example/project' };
+const gitee = { gitee: 'https://gitee.com/example/project' };
 
 test('projects normalize omitted and empty link arrays without requiring metadata', () => {
   const parsed = projectSchema.parse(project);
-  assert.deepEqual(parsed.github, []);
-  assert.deepEqual(parsed.gitee, []);
+  assert.deepEqual(parsed.repositories, []);
   assert.deepEqual(parsed.links, []);
   assert.deepEqual(parsed.languages, []);
   assert.equal(parsed.logoLayout, 'inset');
-  assert.deepEqual(projectSchema.parse({ ...project, github: [], gitee: [], links: [] }), parsed);
+  assert.deepEqual(projectSchema.parse({ ...project, repositories: [], links: [] }), parsed);
 });
 
 test('repository labels default for missing, null and blank values and trim custom text', () => {
-  for (const [field, repository, fallback] of [['github', github, 'GitHub'], ['gitee', gitee, 'Gitee']] as const) {
+  for (const [field, url, fallback] of [['github', github.github, 'GitHub'], ['gitee', gitee.gitee, 'Gitee']] as const) {
     for (const label of [undefined, null, '', '   ']) {
-      const parsed = projectSchema.parse({ ...project, [field]: [{ ...repository, label }] });
-      assert.equal(parsed[field][0].label, fallback);
+      const parsed = projectSchema.parse({ ...project, repositories: [{ [field]: url, label }] });
+      assert.deepEqual(parsed.repositories[0], { platform: field, url, label: fallback });
     }
-    assert.equal(projectSchema.parse({ ...project, [field]: [{ ...repository, label: ' Server ' }] })[field][0].label, 'Server');
-    assert.equal(projectSchema.safeParse({ ...project, [field]: [{ ...repository, label: 42 }] }).success, false);
+    assert.equal(projectSchema.parse({ ...project, repositories: [{ [field]: url, label: ' Server ' }] }).repositories[0].label, 'Server');
+    assert.equal(projectSchema.safeParse({ ...project, repositories: [{ [field]: url, label: 42 }] }).success, false);
   }
 });
 
-test('multiple repositories preserve their order and both platforms can coexist', () => {
-  const parsed = projectSchema.parse({
-    ...project,
-    gitee: [{ ...gitee, label: 'MediaServer' }, { url: 'https://gitee.com/example/server', label: 'Server' }],
-    github: [{ ...github, label: 'Simulator' }]
-  });
-  assert.deepEqual(parsed.gitee.map(link => link.label), ['MediaServer', 'Server']);
-  assert.equal(parsed.github[0].label, 'Simulator');
+test('repository order follows the array even when platforms are interleaved or reversed', () => {
+  const repositories = [{ ...github, label: 'Primary' }, { ...gitee, label: 'Mirror' }, { github: 'https://github.com/example/secondary' }];
+  const parsed = projectSchema.parse({ ...project, repositories });
+  assert.deepEqual(parsed.repositories.map(({ platform, label }) => [platform, label]), [
+    ['github', 'Primary'], ['gitee', 'Mirror'], ['github', 'GitHub']
+  ]);
+  assert.deepEqual(projectSchema.parse({ ...project, repositories: [...repositories].reverse() }).repositories, [...parsed.repositories].reverse());
 });
 
-test('repository fields reject legacy strings and invalid platform URLs', () => {
-  for (const [field, valid, other] of [['github', github.url, gitee.url], ['gitee', gitee.url, github.url]] as const) {
-    assert.equal(projectSchema.safeParse({ ...project, [field]: valid }).success, false);
+test('repositories reject invalid platform URLs', () => {
+  for (const [field, valid, other] of [['github', github.github, gitee.gitee], ['gitee', gitee.gitee, github.github]] as const) {
     for (const url of [other, valid.replace('https:', 'http:'), 'not a URL', `https://${field}.com/example`]) {
-      assert.equal(projectSchema.safeParse({ ...project, [field]: [{ url }] }).success, false, `${field}: ${url}`);
+      assert.equal(projectSchema.safeParse({ ...project, repositories: [{ [field]: url }] }).success, false, `${field}: ${url}`);
     }
+  }
+});
+
+test('each repository requires exactly one platform field and rejects unsupported shapes', () => {
+  for (const repositories of [github, github.github, [github.github], [{}], [{ ...github, ...gitee }], [{ github: { url: github.github } }], [{ url: github.github }], [{ platform: 'github', url: github.github }]]) {
+    assert.equal(projectSchema.safeParse({ ...project, repositories }).success, false);
+  }
+});
+
+test('legacy top-level repository fields fail instead of silently losing links', () => {
+  for (const legacy of [{ github: github.github }, { github: [{ url: github.github }] }, { github: [] }, { gitee: [{ url: gitee.gitee }] }, { gitee: [] }]) {
+    const result = projectSchema.safeParse({ ...project, ...legacy });
+    assert.equal(result.success, false);
+    if (!result.success) assert.ok(result.error.issues.some(issue => issue.code === 'unrecognized_keys'));
   }
 });
 
 test('private and unavailable sources reject repository links but allow empty arrays and ordinary links', () => {
   for (const sourceStatus of ['private', 'unavailable'] as const) {
-    for (const repositories of [{ github: [github] }, { gitee: [gitee] }, { github: [github], gitee: [gitee] }]) {
-      const result = projectSchema.safeParse({ ...project, sourceStatus, ...repositories });
+    for (const repositories of [[github], [gitee], [github, gitee]]) {
+      const result = projectSchema.safeParse({ ...project, sourceStatus, repositories });
       assert.equal(result.success, false);
       if (!result.success) assert.ok(result.error.issues.some(issue => issue.path[0] === 'sourceStatus'));
     }
-    const parsed = projectSchema.parse({ ...project, sourceStatus, github: [], gitee: [], links: [{ label: 'Demo video', url: 'https://example.com/demo' }] });
+    const parsed = projectSchema.parse({ ...project, sourceStatus, repositories: [], links: [{ label: 'Demo video', url: 'https://example.com/demo' }] });
     assert.equal(parsed.sourceStatus, sourceStatus);
     assert.equal(parsed.links[0].label, 'Demo video');
   }

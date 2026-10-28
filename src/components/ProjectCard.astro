@@ -2,12 +2,23 @@
 import type { Project } from '../lib/content';
 interface Props { project: Project }
 const { project: { data: project } } = Astro.props;
-const colors: Record<string, string> = { Rust: '#dea584', TypeScript: '#3178c6', JavaScript: '#f1e05a', Python: '#3572a5', 'C++': '#f34b7d', 'C#': '#178600', Go: '#00add8', CSS: '#663399' };
-const repositories = [
-  ...project.gitee.map(link => ({ ...link, platform: 'gitee', name: 'Gitee' })),
-  ...project.github.map(link => ({ ...link, platform: 'github', name: 'GitHub' }))
-];
-const hasLinks = Boolean(repositories.length || project.sourceStatus || project.links.length);
+const colors: Record<string, string> = {
+  Assembly: '#6e4c13',
+  C: '#555555',
+  'C++': '#f34b7d',
+  'C#': '#7355dd',
+  Go: '#00add8',
+  Java: '#b07219',
+  Kotlin: '#a97bff',
+  Python: '#3572a5',
+  Rust: '#dea584',
+  HTML: '#e34c26',
+  CSS: '#663399',
+  JavaScript: '#f1e05a',
+  TypeScript: '#3178c6'
+};
+const repositoryNames = { github: 'GitHub', gitee: 'Gitee' };
+const hasLinks = Boolean(project.repositories.length || project.sourceStatus || project.links.length);
 const hasMetadata = Boolean(project.languages.length || hasLinks);
 ---
 <article class:list={['project-card', `project-card--${project.tone}`]}>
@@ -20,7 +31,7 @@ const hasMetadata = Boolean(project.languages.length || hasLinks);
   {hasMetadata && <div class="project-foot">
     {project.languages.length > 0 && <div class="project-languages">{project.languages.map(language => <span class="project-language"><i aria-hidden="true" style={`--lang-color:${colors[language] ?? 'var(--muted)'}`}></i>{language}</span>)}</div>}
     {hasLinks && <div class="project-links">
-      {repositories.map(link => <a class="project-outlink" href={link.url} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} — ${link.name}${link.label === link.name ? '' : ` — ${link.label}`}`}><span class={`brand-symbol brand-symbol--${link.platform}`} aria-hidden="true"></span><span>{link.label}</span></a>)}
+      {project.repositories.map(link => <a class="project-outlink" href={link.url} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} — ${repositoryNames[link.platform]}${link.label === repositoryNames[link.platform] ? '' : ` — ${link.label}`}`}><span class={`brand-symbol brand-symbol--${link.platform}`} aria-hidden="true"></span><span>{link.label}</span></a>)}
       {project.sourceStatus && <span class="project-source-closed">{project.sourceStatus === 'private' ? 'Private' : 'Source unavailable'}</span>}
       {project.links.map(link => <a class="project-outlink" href={link.url} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} — ${link.label}`}><svg class="project-link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13.5a5 5 0 0 0 7.8.6l2.3-2.3a5 5 0 0 0-7.1-7.1l-1.3 1.3M14 10.5a5 5 0 0 0-7.8-.6l-2.3 2.3A5 5 0 0 0 11 19.3l1.3-1.3" /></svg><span>{link.label}</span></a>)}
     </div>}

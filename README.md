@@ -49,8 +49,8 @@ GitHub Pages 的发布来源设为 **Settings → Pages → Build and deployment
   description: A technical site for software projects and development notes.
   order: 100
   languages: [Astro, TypeScript]
-  github:
-    - url: https://github.com/lte-z/lte-z.github.io
+  repositories:
+    - github: https://github.com/lte-z/lte-z.github.io
   links:
     - label: Website
       url: https://lte-z.github.io/
@@ -63,14 +63,14 @@ GitHub Pages 的发布来源设为 **Settings → Pages → Build and deployment
 | `logo` | 先将图片放入 `public/assets/projects/`，再填写 `/assets/projects/name.svg`；支持 SVG、PNG、WebP、JPG、JPEG，路径使用英文字母、数字、斜杠、下划线和连字符 |
 | `logoLayout` | 默认 `inset`，图片居中留白；`full` 将正方形图片等比铺满图标容器，由容器统一控制圆角，必须同时填写 `logo` |
 | `tone` | `lavender`、`rose`、`sage`、`sand`，默认 lavender |
-| `languages` | 语言名称数组，缺省为空；常见语言使用对应标记色，其他使用默认色 |
-| `github`、`gitee` | 仓库链接数组，每项填写 HTTPS `url` 和可选的 `label`；文案留空时显示 GitHub／Gitee，图标按平台显示 |
-| `sourceStatus` | `private` 显示 Private，`unavailable` 显示 Source unavailable；与非空的 `github`／`gitee` 仓库数组互斥，可与普通 `links` 共存 |
+| `languages` | 语言名称数组，缺省为空；内置语言采用 GitHub Linguist 配色，其他使用默认色 |
+| `repositories` | 有序仓库数组；每项只填 `github` 或 `gitee` 的 HTTPS 仓库地址，以及可选的 `label`；文案留空时显示平台名称，图标按平台显示 |
+| `sourceStatus` | `private` 显示 Private，`unavailable` 显示 Source unavailable；与非空的 `repositories` 互斥，可与普通 `links` 共存 |
 | `links` | 如示例所示，每项填写 `label` 和 HTTPS `url`，统一显示锁链图标 |
 
 未填写 Logo 时使用默认代码图形，可选信息缺失时自动省略对应区域。项目中只有具体链接可点击。
 
-仓库与普通链接均为数组，可省略或写为 `[]`。显示顺序为 Gitee → GitHub → 普通链接，各数组内部按填写顺序显示。
+`repositories`、`links` 均可省略或写为 `[]`。仓库严格按数组顺序显示，可混排 GitHub／Gitee；普通链接随后按填写顺序显示。
 
 ### Blog：添加文章
 

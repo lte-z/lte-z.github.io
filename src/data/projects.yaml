@@ -5,8 +5,8 @@
   logo: /assets/projects/diffraction-pattern-simulator.png
   tone: lavender
   languages: [ Python ]
-  github:
-    - url: https://github.com/lte-z/FraunhoferDiffraction
+  repositories:
+    - github: https://github.com/lte-z/FraunhoferDiffraction
   logoLayout: full
 
 - id: drawing-board
@@ -44,8 +44,8 @@
   logo: /assets/projects/lantern-reverie.png
   tone: lavender
   languages: [ C++ ]
-  gitee:
-    - url: https://gitee.com/lte_z/lantern-reverie
+  repositories:
+    - gitee: https://gitee.com/lte_z/lantern-reverie
 
 - id: agent-memory-system
   title: AgentMemorySystem
@@ -71,8 +71,8 @@
   logo: /assets/projects/spirit-ink.svg
   tone: sand
   languages: [ C++, Python, TypeScript ]
-  gitee:
-    - url: https://gitee.com/lte_z/spirit-ink
+  repositories:
+    - gitee: https://gitee.com/lte_z/spirit-ink
 
 - id: sector-13
   title: Sector-13
@@ -89,8 +89,8 @@
   logo: /assets/projects/scale-boundary.png
   tone: rose
   languages: [ C# ]
-  gitee:
-    - url: https://gitee.com/lte_z/scale-boundary
+  repositories:
+    - gitee: https://gitee.com/lte_z/scale-boundary
   links:
     - label: Demo video
       url: https://weixin.qq.com/sph/AdqBHEb6Dp
@@ -102,8 +102,8 @@
   order: 11
   tone: sage
   languages: [ Python ]
-  github:
-    - url: https://github.com/lte-z/RepoPilot
+  repositories:
+    - github: https://github.com/lte-z/RepoPilot
 
 - id: bupt-gpa-calculator
   title: BUPT GPA Calculator
@@ -112,8 +112,8 @@
   logo: /assets/projects/bupt-gpa-calculator.png
   tone: sand
   languages: [ C# ]
-  github:
-    - url: https://github.com/lte-z/BUPT-GPA-Calculator
+  repositories:
+    - github: https://github.com/lte-z/BUPT-GPA-Calculator
   links:
     - label: Launch post
       url: https://xhslink.cn/o/8w4w5xgCSE1
@@ -134,17 +134,16 @@
   order: 14
   tone: rose
   languages: [ C++, Java, JavaScript ]
-  gitee:
-    - url: https://gitee.com/lte_z/SVA-mediaServer
+  repositories:
+    - gitee: https://gitee.com/lte_z/SVA-mediaServer
       label: MediaServer
-    - url: https://gitee.com/lte_z/SVA-server
+    - gitee: https://gitee.com/lte_z/SVA-server
       label: Server
-    - url: https://gitee.com/lte_z/SVA-backend
+    - gitee: https://gitee.com/lte_z/SVA-backend
       label: Backend
-    - url: https://gitee.com/lte_z/SVA-web
+    - gitee: https://gitee.com/lte_z/SVA-web
       label: Web
-  github:
-    - url: https://github.com/lte-z/easyGB28181
+    - github: https://github.com/lte-z/easyGB28181
       label: easyGB28181
 
 - id: cluster-flow
@@ -154,8 +153,8 @@
   logo: /assets/projects/cluster-flow.png
   tone: sage
   languages: [ Rust, Python, TypeScript ]
-  gitee:
-    - url: https://gitee.com/lte_z/cluster-flow
+  repositories:
+    - gitee: https://gitee.com/lte_z/cluster-flow
 
 - id: regime-shift
   title: RegimeShift
