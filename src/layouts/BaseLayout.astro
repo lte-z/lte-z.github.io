@@ -1,0 +1,95 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/tokens.css';
+import '../styles/base.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  page: 'home' | 'work' | 'blog' | 'article' | 'notfound';
+  lang?: 'en' | 'zh-CN' | 'ja';
+  noindex?: boolean;
+}
+const { title, description, page, lang = 'en', noindex = false } = Astro.props;
+const canonical = new URL(page === 'notfound' ? '/404.html' : Astro.url.pathname, Astro.site);
+const image = new URL('/assets/avatar/avatar.webp', Astro.site);
+const current = page === 'home' ? 'Home' : page === 'work' ? 'Work' : page === 'blog' || page === 'article' ? 'Blog' : undefined;
+const reading = page === 'blog' || page === 'article';
+const googleFonts = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600&family=Fraunces:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500' + (page === 'home' ? '&family=Playwrite+DE+LA:wght@100..400' : '') + '&display=swap';
+---
+<!doctype html>
+<html lang={lang} data-page={page}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#faf9f7" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:type" content={page === 'article' ? 'article' : 'website'} />
+    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content="lte_z" />
+    <meta property="og:url" content={canonical} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content="lte_z illustrated avatar" />
+    <meta property="og:image:width" content="192" />
+    <meta property="og:image:height" content="192" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/assets/avatar/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/assets/avatar/favicon-16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/avatar/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/assets/avatar/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="Blog - lte_z" href="/rss.xml" />
+    <script is:inline>
+      // 首帧主题必须先于样式和正文；运行期偏好由 preferences.js 管理。
+      (() => {
+        const root = document.documentElement;
+        let saved = null;
+        try { saved = localStorage.getItem('ltez-color-theme'); } catch {}
+        const dark = saved === 'dark' || (saved !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        root.dataset.theme = dark ? 'dark' : 'light';
+        document.querySelector('meta[name="theme-color"]').content = dark ? '#1b1a23' : '#faf9f7';
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (root.dataset.page === 'home') {
+          root.classList.add('motion-boot');
+          window.__motionBootFallback = setTimeout(() => {
+            window.__motionBootAborted = true;
+            window.creatureEntrance?.finish();
+            window.footerLogoEntrance?.finish();
+            root.classList.remove('motion-boot', 'motion-ready');
+            document.querySelectorAll('.will-reveal').forEach(node => node.classList.remove('will-reveal', 'is-visible'));
+          }, 4500);
+        } else {
+          root.classList.add('footer-prepared');
+          window.__footerBootFallback = setTimeout(() => {
+            if (!window.__footerMotionReady) {
+              root.classList.remove('footer-prepared');
+              window.footerLogoEntrance?.finish();
+            }
+          }, 4500);
+        }
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={googleFonts} />
+    {reading && <link rel="stylesheet" href="/assets/fonts/sarasa-sc/fonts.css" />}
+  </head>
+  <body>
+    <Header current={current} />
+    <slot />
+    <Footer />
+    <script>
+      const colors = getComputedStyle(document.documentElement);
+      console.log(
+        '%c👋 lte_z’s technical site\n%c   小Z工作室#2026 · https://ltez.wordpress.com/',
+        `font-size:14px;font-weight:bold;color:${colors.getPropertyValue('--accent').trim()}`,
+        `font-size:12px;color:${colors.getPropertyValue('--muted').trim()}`
+      );
+    </script>
+  </body>
+</html>

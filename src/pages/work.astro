@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { sortProjects } from '../lib/content';
+import '../styles/work.css';
+const projects = sortProjects(await getCollection('projects'));
+---
+<BaseLayout page="work" title="Work - lte_z" description="Projects, tools, and experiments by lte_z.">
+  <main class="wrap page-main work-page">
+    <PageIntro id="work-heading"><Fragment slot="title">Projects, tools, and <em>random things</em> I've built.</Fragment>Sometimes curiosity is reason enough to build something.</PageIntro>
+    <section class="work-gallery" aria-label="Selected software projects"><div class="project-grid">{projects.map(project => <ProjectCard project={project} />)}</div></section>
+  </main>
+</BaseLayout>
+<script>import '../scripts/page-entry.js';</script>

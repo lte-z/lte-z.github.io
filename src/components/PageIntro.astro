@@ -1,0 +1,8 @@
+---
+interface Props { align?: 'left' | 'center'; id: string }
+const { align = 'center', id } = Astro.props;
+---
+<section class:list={['page-intro', { 'page-intro--left': align === 'left' }]} aria-labelledby={id}>
+  <h1 id={id}><slot name="title" /></h1>
+  <p><slot /></p>
+</section>

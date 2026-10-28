@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lte-z.github.io/sitemap-index.xml

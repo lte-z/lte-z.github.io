@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Creatures from '../components/home/Creatures.astro';
+import ExploreCards from '../components/home/ExploreCards.astro';
+import '../styles/home.css';
+import '../styles/creatures.css';
+---
+<BaseLayout page="home" title={"lte_z - Tech Notes & Projects"} description="lte_z’s technical site featuring software projects, explorations in AI, and development notes.">
+<main class="wrap page-main">
+<section class="hero" aria-label="Introduction"><div class="hero-copy">
+<p class="hello" data-intro="hello">Hey, I'm</p>
+<div class="wordmark-entry" data-intro="wordmark"><h1 class="wordmark">lte_z</h1></div>
+<p class="intro" data-intro="description">I'm a software developer exploring emerging directions in AI, with an interest in writing, photography, and visual design.</p>
+<div class="contact" data-intro="contact">
+<a href="mailto:ltezstudios@gmail.com"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg><span>Email</span><svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+<a href="https://github.com/lte-z" target="_blank" rel="noopener noreferrer"><svg class="contact-icon contact-icon--github-outline" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 19.25C5.2 20.35 4 17.35 2 16"/><path d="M15 22v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 19 4.77 5.07 5.07 0 0 0 18.91 1S17.73.65 15 2.48a13.38 13.38 0 0 0-7 0C5.27.65 4.09 1 4.09 1A5.07 5.07 0 0 0 4 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 8 18.13V22"/></svg><span>GitHub</span><svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+<a href="/resume.pdf" target="_blank" rel="noopener noreferrer"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></svg><span>CV</span><svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+</div>
+</div><Creatures /></section>
+<section class="section about" id="about" aria-labelledby="about-title"><h2 id="about-title" class="about-label reveal">A little about me</h2>
+<p class="about-text reveal">I've always liked <em>the freedom to create</em> within software's rules, where even the most precise structures can leave room for imagination.</p>
+<p class="about-small reveal">I suppose there's a little artistry in writing code, too.</p></section>
+<section class="section background" id="background" aria-labelledby="background-title"><div><h2 class="section-title reveal" id="background-title">Along the way.</h2></div>
+<ol class="timeline"><li class="reveal reveal--timeline"><span class="dot" aria-hidden="true"></span><span class="date">2026 —</span><div class="entry-body"><h3>Building &amp; contributing.</h3><p>I publish my own software, contribute to open source, and keep improving projects well beyond their first release.</p></div></li>
+<li class="reveal reveal--timeline"><span class="dot" aria-hidden="true"></span><span class="date">2024 —</span><div class="entry-body"><h3>More things to explore.</h3><p>At <a href="https://www.bupt.edu.cn/" target="_blank" rel="noopener noreferrer" title="Beijing University of Posts and Telecommunications">BUPT</a>, I'm a Software Engineering major, exploring different tech stacks, building with teams, and getting into AI research.</p></div></li>
+<li class="reveal reveal--timeline"><span class="dot" aria-hidden="true"></span><span class="date">2018–2024</span><div class="entry-body"><h3>Getting into algorithms.</h3><p>OI introduced me to C++ and the satisfaction of working through tricky problems during my years at <a href="https://www.sdsz.com.cn/" target="_blank" rel="noopener noreferrer" title="The Experimental High School Attached to Beijing Normal University">SDSZ</a>.</p></div></li></ol></section>
+<ExploreCards />
+<section class="section beyond" id="elsewhere" aria-labelledby="beyond-title"><div><h2 class="section-title reveal" id="beyond-title">Beyond the code.</h2></div><div class="beyond-copy reveal"><p>There are other things I enjoy, too — <em>photography, writing, and design.</em> Those stories have their own little corners of the internet.</p>
+<div class="link-set">
+  <a href="https://ltez.wordpress.com/" target="_blank" rel="noopener noreferrer">
+    <img class="platform-icon" src="/assets/brand/wordpress.svg" alt="" width="16" height="16" loading="lazy" decoding="async">
+    <span>Personal site</span><svg viewBox="0 0 24 24" class="external-icon" aria-hidden="true"><path d="M7 17 17 7M7.5 7H17v9.5"/></svg>
+  </a>
+  <a href="https://ltez.notion.site/22b383383dd2440aa1c0b4da54e4e359" target="_blank" rel="noopener noreferrer">
+    <img class="platform-icon platform-icon--notion" src="/assets/brand/notion.svg" alt="" width="16" height="16" loading="lazy" decoding="async">
+    <span>Creative archive</span><svg viewBox="0 0 24 24" class="external-icon" aria-hidden="true"><path d="M7 17 17 7M7.5 7H17v9.5"/></svg>
+  </a>
+</div></div></section>
+</main>
+</BaseLayout>
+<script>import '../scripts/home-entry.js';</script>

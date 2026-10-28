@@ -1,0 +1,12 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { selectPosts, getPostNeighbors } from '../../lib/content';
+export async function getStaticPaths() {
+  const posts = selectPosts(await getCollection('blog'), import.meta.env.DEV);
+  return posts.map(post => ({ params: { id: post.id }, props: { post, ...getPostNeighbors(posts, post.id) } }));
+}
+const { post, newer, older } = Astro.props;
+const { Content, headings } = await render(post);
+---
+<ArticleLayout post={post} headings={headings} newer={newer} older={older}><Content /></ArticleLayout>

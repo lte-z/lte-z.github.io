@@ -1,0 +1,133 @@
+/* 450×370 统一设计空间，整组等比缩放，无舞台背景。 */
+.hero-creatures {
+  --eye-ink:#47424f;
+  --scene-scale:1;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  width:min(100%,450px);
+  aspect-ratio:450 / 370;
+  min-width:0;
+  margin-inline:auto;
+  isolation:isolate;
+}
+.creatures-layout {
+  position:relative;
+  flex:0 0 450px;
+  width:450px;
+  height:370px;
+  transform-origin:center top;
+  transform:scale(var(--scene-scale));
+}
+.creatures-ground {
+  position:absolute;
+  left:15%;right:12%;bottom:15px;height:10px;
+  background:radial-gradient(ellipse at center,rgba(93,79,99,.055),transparent 73%);
+  pointer-events:none;
+  z-index:0;
+}
+.creature {
+  position:absolute;
+  box-sizing:border-box;
+  border:0;
+  background:transparent;
+  padding:0;
+  margin:0;
+  cursor:pointer;
+  display:block;
+  overflow:visible;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.creature:focus:not(:focus-visible){outline:none}
+.creature:focus-visible {outline:2px dashed #ab8aaf;outline-offset:3px;border-radius:18px}
+.creature-art {
+  display:block;
+  width:100%;height:100%;
+  overflow:visible;
+  transform-origin:50% 100%;
+  transform:skewX(var(--lean,0deg)) scaleX(var(--squash,1)) scaleY(var(--stretch,1));
+  transition:transform .38s cubic-bezier(.18,.78,.24,1.16);
+  will-change:transform;
+}
+.creature .body-shape {fill:var(--body-color)}
+.creature .eyes-open {fill:var(--eye-ink)}
+.creature .eyes-blink,.creature .eyes-poked {
+  opacity:0;fill:none;stroke:var(--eye-ink);stroke-width:3.5;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.creature .eyes-open,.creature .eyes-blink,.creature .eyes-poked {transition:opacity .065s linear}
+.creature.is-blinking .eyes-open,.creature.is-poked .eyes-open {opacity:0}
+.creature.is-blinking .eyes-blink {opacity:1}
+.creature.is-poked .eyes-blink {opacity:0}
+.creature.is-poked .eyes-poked {opacity:1}
+/* 每只角色保持 SVG 固定比例，共用 y=351 的底边。 */
+.creature--tall {
+  --body-color:#a49ac4;
+  --entry-depth:318px;
+  width:140px;height:var(--entry-depth);bottom:19px;left:90px;z-index:1;
+}
+.creature--ochre {
+  --body-color:#dfc5a0;
+  --entry-depth:249.6px;
+  width:116.5px;height:var(--entry-depth);bottom:19px;left:284px;z-index:2;
+}
+.creature--rose {
+  --body-color:#e2a9b0;
+  --entry-depth:190.5px;
+  width:137px;height:var(--entry-depth);bottom:19px;left:40px;z-index:3;
+}
+.creature--sage {
+  --body-color:#b9d0ba;
+  --entry-depth:177px;
+  width:118px;height:var(--entry-depth);bottom:19px;left:211px;z-index:4;
+}
+.creature--tall.is-poked{--squash:1.025;--stretch:.974}
+.creature--ochre.is-poked{--squash:1.048;--stretch:.947}
+.creature--rose.is-poked{--squash:1.055;--stretch:.924}
+.creature--sage.is-poked{--squash:1.042;--stretch:.948}
+.creature-speech {
+  position:absolute;
+  top:0;left:50%;
+  width:max-content;
+  max-width:180px;
+  padding:8px 12px;
+  border-radius:12px;
+  border:1px solid rgba(133,113,135,.13);
+  background:#fffefa;
+  box-shadow:0 7px 22px rgba(63,49,67,.085);
+  color:#655c70;
+  font:500 12px/1.5 var(--body);
+  text-align:center;
+  opacity:0;
+  transform:translate(-50%,6px) scale(.98);
+  pointer-events:none;
+  transition:opacity .19s ease,transform .24s cubic-bezier(.2,.7,.2,1);
+  z-index:6;
+  white-space:normal;
+}
+.creature-speech.is-visible {opacity:1;transform:translate(-50%,0) scale(1)}
+@media(prefers-reduced-motion:reduce){
+  .creature-art,.creature-speech,.creature .eyes-open,.creature .eyes-blink,.creature .eyes-poked {transition:none!important}
+}
+
+/* 无 JS 时使用断点回退，正常情况下由脚本精确等比缩放。 */
+@media(max-width:1100px){.hero-creatures{--scene-scale:.76}}
+/* 手机端容器高度与实际缩放画面同步，避免保留未缩放的空白。 */
+@media(max-width:740px){.hero-creatures{--scene-scale:.78;height:calc(370px * var(--scene-scale))}}
+@media(max-width:380px){.hero-creatures{--scene-scale:.63}}
+
+/* 入场位移独立于身体弹性变形。 */
+.scene-intro-locked .creatures-layout {clip-path:inset(0 0 19px 0)}
+.scene-intro-locked .creature {transform:translateY(var(--entry-depth));pointer-events:none;cursor:default}
+.scene-intro-locked .creature-speech {visibility:hidden}
+
+html[data-theme="dark"] .hero-creatures{--eye-ink:#36303e}
+html[data-theme="dark"] .creature--tall{--body-color:#aa9bc8}
+html[data-theme="dark"] .creature--ochre{--body-color:#d7b890}
+html[data-theme="dark"] .creature--rose{--body-color:#dca1ac}
+html[data-theme="dark"] .creature--sage{--body-color:#adc9ae}
+html[data-theme="dark"] .creatures-ground{background:radial-gradient(ellipse at center,#05040939,transparent 73%)}
+html[data-theme="dark"] .creature-speech{background:#342d3c;color:#e9dfef;border-color:#695770;box-shadow:0 9px 24px #07050966}
+html[data-theme="dark"] .creature:focus-visible{outline-color:#cca9d6}

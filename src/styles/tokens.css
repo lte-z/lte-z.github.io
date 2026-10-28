@@ -1,0 +1,67 @@
+/* 全站语义色、字体职责与共享动效参数。 */
+:root {
+  --paper: #faf9f7;
+  --ink: #252734;
+  --muted: #746e7d;
+  --muted-dark: #595866;
+  --rule: #e9e7e6;
+  --accent: #df926e;
+  --accent-dark: #b46e5d;
+  --footer-ink: var(--muted);
+  --logo-muted: var(--footer-ink);
+  --logo-alt: #8c7e8d;
+  --logo-hover: #877a88;
+  --wordmark-ink: #77657e;
+  --wordmark-ink-light: #957b9d;
+  --body: 'Atkinson Hyperlegible Next', 'Segoe UI', Arial, sans-serif;
+  --display: var(--body);
+  --flourish: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  --signature: 'Playwrite DE LA', cursive;
+  --max: 1056px;
+  --wordmark-scale-x: 1.05;
+  --wordmark-shift-y: -4px;
+  --reveal-duration: .85s;
+  --editorial-em: #ab7088;
+  --icon-hover-duration: .24s;
+  --icon-hover-ease: cubic-bezier(.2,.8,.2,1);
+  --icon-hover-transform: rotate(-5deg) scale(1.045);
+  --reveal-distance: 14px;
+  --reveal-ease: cubic-bezier(.16,1,.3,1);
+  /* 三语阅读内容使用同站、固定版本的 SC Webfont。 */
+  --reading-sc: 'Sarasa Gothic SC Web','PingFang SC','Microsoft YaHei',sans-serif;
+  --blog-wash: #f1eef2;
+  --blog-quote: #a98a9c;
+  --blog-code-bg: #f1eef2;
+  --blog-code-ink: #454252;
+  --blog-figure: #f1eef2;
+  --blog-link: #675b87;
+  --blog-soft: #746e7d;
+  --arrive-duration:.78s;
+  --arrive-ease:cubic-bezier(.22,.8,.26,1);
+  --arrive-distance:10px
+}
+html[data-theme="dark"] {
+  /* 使用网站深色方案，并请求浏览器不要再次调色。 */
+  color-scheme:dark;
+  color-scheme:only dark;
+  --paper:#1b1a23;
+  --editorial-em:#e3a1b7;
+  --ink:#f0edf3;
+  --muted:#ada6b4;
+  --muted-dark:#c4bac8;
+  --rule:#38333f;
+  --accent:#dda08a;
+  --accent-dark:#efb59e;
+  --logo-alt:#c1b3c3;
+  --logo-hover:#beb1c0;
+  --wordmark-ink:#c6a8d0;
+  --wordmark-ink-light:#e0bfe5;
+  --blog-wash: #262431;
+  --blog-quote: #b69cb9;
+  --blog-code-bg: #262431;
+  --blog-code-ink: #e5dfea;
+  --blog-figure: #262431;
+  --blog-link: #d8b1c8;
+  --blog-soft: #99909f;
+}

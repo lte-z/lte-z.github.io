@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { selectPosts, groupPostsByYear, formatArchiveDate, postURL } from '../../lib/content';
+import '../../styles/blog.css';
+const years = groupPostsByYear(selectPosts(await getCollection('blog'), import.meta.env.DEV));
+---
+<BaseLayout page="blog" title="Blog - lte_z" description="Field notes, deep dives, and small discoveries.">
+  <main class="wrap page-main blog-index">
+    <PageIntro id="blog-heading" align="left"><Fragment slot="title">Field notes, deep dives, and <em>small discoveries.</em></Fragment>For the things that linger.</PageIntro>
+    <div class="archive-list" aria-label="Articles by year">
+      {years.map(group => <section class="archive-year" aria-labelledby={`year-${group.year}`}><h2 id={`year-${group.year}`}>{group.year}</h2><ol class="archive-entries">{group.posts.map(post => <li class="archive-entry" lang={post.data.lang}><a class="archive-title" href={postURL(post)}>{post.data.title}</a><time class="archive-date" datetime={post.data.pubDate} lang="en">{formatArchiveDate(post.data.pubDate)}</time></li>)}</ol></section>)}
+    </div>
+  </main>
+</BaseLayout>
+<script>import '../../scripts/page-entry.js';</script>

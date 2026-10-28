@@ -1,0 +1,31 @@
+---
+import type { MarkdownHeading } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import type { Post } from '../lib/content';
+import { postURL } from '../lib/content';
+import '../styles/blog.css';
+import 'katex/dist/katex.min.css';
+interface Props { post: Post; headings: MarkdownHeading[]; newer?: Post; older?: Post }
+const { post, headings, newer, older } = Astro.props;
+const toc = headings.filter(heading => (heading.depth === 2 || heading.depth === 3) && !['footnote-label', 'user-content-footnote-label'].includes(heading.slug));
+const hasToc = toc.length >= 2;
+---
+<BaseLayout page="article" title={`${post.data.title} - lte_z`} description={post.data.description} lang={post.data.lang} noindex={post.data.draft}>
+  <main class:list={['wrap', 'page-main', 'article-page', { 'article-without-toc': !hasToc }]}>
+    <div class="article-return" lang="en"><a href="/blog/">← All writing</a></div>
+    <header class="article-header" lang={post.data.lang}>
+      <h1>{post.data.title}</h1>
+      <div class="article-metadata"><time datetime={post.data.pubDate}>{post.data.pubDate}</time></div>
+      {post.data.description && <p class="article-deck">{post.data.description}</p>}
+    </header>
+    <div class="article-layout">
+      <article class="article-prose" lang={post.data.lang}><slot /></article>
+      {hasToc && <aside class="article-toc" aria-label="On this page"><div class="toc-caption" lang="en">On this page</div><nav>{toc.map(heading => <a class:list={{ 'toc-subheading': heading.depth === 3 }} href={`#${heading.slug}`}>{heading.text}</a>)}</nav></aside>}
+    </div>
+    {(newer || older) && <nav class="article-neighbors" aria-label="Adjacent articles">
+      {newer && <a class="neighbor-link neighbor--newer" href={postURL(newer)}><span lang="en">← Newer</span><strong lang={newer.data.lang}>{newer.data.title}</strong></a>}
+      {older && <a class="neighbor-link neighbor--older" href={postURL(older)}><span lang="en">Older →</span><strong lang={older.data.lang}>{older.data.title}</strong></a>}
+    </nav>}
+  </main>
+</BaseLayout>
+<script>import '../scripts/page-entry.js'; import '../scripts/copy-code.js';</script>

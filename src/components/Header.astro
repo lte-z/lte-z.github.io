@@ -1,0 +1,22 @@
+---
+interface Props { current?: 'Home' | 'Work' | 'Blog' }
+const { current } = Astro.props;
+const links = [{ name: 'Home', href: '/' }, { name: 'Work', href: '/work/' }, { name: 'Blog', href: '/blog/' }];
+---
+<header lang="en" class="nav wrap" id="top">
+<a class="avatar-link" href="https://ltez.wordpress.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit my personal site"><img src="/assets/avatar/avatar.webp" width="43" height="43" alt="lte_z illustrated avatar"></a>
+<div class="nav-end">
+  <nav class="nav-links" aria-label="Main navigation">
+    {links.map(link => <a href={link.href} class:list={{ active: current === link.name }} aria-current={current === link.name ? 'page' : undefined}>{link.name}</a>)}
+  </nav>
+  <div class="header-controls" hidden role="group" aria-label="Display and sound controls">
+    <button class="header-icon-button sound-toggle" id="sound-toggle" type="button" aria-label="Mute creature sounds" aria-pressed="false" title="Mute creature sounds">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="sound-icon sound-icon--on"><path d="M11 5 6.4 9H3.5v6h2.9l4.6 4V5Z"/><path d="M15 9a4 4 0 0 1 0 6"/><path d="M18 6a8 8 0 0 1 0 12"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="sound-icon sound-icon--off"><path d="M11 5 6.4 9H3.5v6h2.9l4.6 4V5Z"/><path d="m16 9 5 6m0-6-5 6"/></svg>
+    </button>
+    <button class="header-icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode">
+      <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 16.5C17 17.5 12.2 15.2 10.3 10.7C9.2 8 9.4 5.3 10.5 2.6C6.1 3.4 3.2 7.2 3.2 11.9C3.2 17 7.1 20.8 12 20.8C15.5 20.8 18.6 19.3 20.2 16.5Z"/></svg>
+      <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+    </button>
+  </div>
+</div></header>

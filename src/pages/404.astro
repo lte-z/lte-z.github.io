@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+---
+<BaseLayout page="notfound" title="404 - lte_z" noindex>
+  <main class="wrap page-main not-found">
+    <div class="not-found-content">
+      <PageIntro id="not-found-heading" align="left"><Fragment slot="title">Page <em>not found.</em></Fragment>The page you're looking for isn't here.</PageIntro>
+      <p class="not-found-return"><a href="/">← Back home</a></p>
+    </div>
+  </main>
+</BaseLayout>
+<script>import '../scripts/page-entry.js';</script>
+<style>
+  .not-found{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-block:64px 112px}
+  .not-found-content{width:fit-content;max-width:100%;text-align:left}
+  .not-found-content :global(.page-intro){max-width:none;margin:0;padding:0}
+  .not-found-return{margin:32px 0 0;font:500 13px/1.5 var(--body);color:var(--muted)}
+  .not-found-return a{text-decoration:underline;text-underline-offset:4px}
+  @media(prefers-reduced-motion:no-preference){.not-found-return{animation:page-arrive var(--arrive-duration) var(--arrive-ease) 260ms backwards}}
+  @media(max-width:740px){.not-found{align-items:center;padding-block:48px 80px}}
+</style>

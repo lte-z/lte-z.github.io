@@ -1,0 +1,12 @@
+---
+import StudioMark from './StudioMark.astro';
+const year = Math.max(2026, new Date().getFullYear());
+const copyright = `© ${year === 2026 ? '2026' : `2026–${year}`} lte_z. All rights reserved.`;
+---
+<footer lang="en" class="footer wrap">
+  <button id="studio-trigger" disabled class="logo-button" type="button" aria-label="Interactive studio mark; hover, focus or tap for a hidden greeting"><StudioMark /></button>
+  <div class="footer-right reveal">
+    <a href="#top" class="back-top">Back to top <svg class="up-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></a>
+    <small class="footer-copyright" id="footer-copyright">{copyright}</small>
+  </div>
+</footer>
