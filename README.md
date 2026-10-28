@@ -32,6 +32,12 @@ npm run dev
 
 端口被占用时以终端输出为准。空项目／文章集合产生的 Astro 提示属于正常状态。
 
+### 部署
+
+GitHub Pages 的发布来源设为 **Settings → Pages → Build and deployment → Source → GitHub Actions**。
+
+[部署工作流](.github/workflows/deploy.yml)使用 Node.js 22.23.4，执行 `npm ci`、检查、测试和构建；全部通过后，将 `dist/` 发布至 `https://lte-z.github.io/`。推送到 `main` 自动触发，也可在 Actions 页面选择该工作流，通过 **Run workflow → main** 手动发布。
+
 ## 📝 内容维护
 
 ### Work：添加项目
